@@ -72,13 +72,34 @@
   }
 
   .nav-logo {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
     font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
     font-size: 15px;
     letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--charcoal);
+    text-decoration: none;
+    transition: color 0.3s ease;
   }
+
+  .nav-logo-arrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0;
+    color: var(--warm-gray);
+    transform: translateX(0);
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+
+  .nav-logo:hover .nav-logo-arrow {
+    transform: translateX(-3px);
+    color: var(--sage);
+  }
+
+  .nav-logo:hover { color: var(--charcoal); }
 
   .nav-links {
     display: flex;
@@ -462,7 +483,11 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--charcoal);
+    text-decoration: none;
+    transition: color 0.3s ease;
   }
+
+  .footer-left:hover { color: var(--sage-deep); }
 
   .footer-right {
     font-size: 11px;
@@ -567,7 +592,10 @@
 
 <!-- Navigation -->
 <nav id="nav" aria-label="Primary">
-  <div class="nav-logo">Willow</div>
+  <a href="/" class="nav-logo" aria-label="Back to Willow home">
+    <span class="nav-logo-arrow" aria-hidden="true">←</span>
+    <span class="nav-logo-text">Willow</span>
+  </a>
   <ul class="nav-links">
     <li><a href="#philosophy">Philosophy</a></li>
     <li><a href="#principles">Principles</a></li>
@@ -688,7 +716,7 @@
 
 <!-- Footer -->
 <footer>
-  <div class="footer-left">Weeping Willow Whisperer</div>
+  <a class="footer-left" href="/">Weeping Willow Whisperer</a>
   <div class="footer-right">Concept-Driven Creative Studio — Founded by Candan Üstün</div>
 </footer>
 
