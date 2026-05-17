@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Weeping Willow Whisperer — Creative Studio</title>
+<meta name="description" content="Weeping Willow Whisperer is a concept-driven creative studio designing for emotional resonance — work that is felt, remembered, and inhabited.">
+<meta property="og:title" content="Weeping Willow Whisperer — Creative Studio">
+<meta property="og:description" content="Concept-driven creative studio. Designing for emotional resonance — work that is felt, remembered, and inhabited.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -13,7 +20,7 @@
     --sage-deep: #6B7D5C;
     --charcoal: #2C2C2A;
     --warm-gray: #6B6860;
-    --soft-gray: #A8A49C;
+    --soft-gray: #7A766E;
     --line: #D6D0C4;
     --accent: #B5A78D;
   }
@@ -336,7 +343,9 @@
     position: relative;
   }
 
-  .belief-mark {
+  .belief-inner::before {
+    content: '\201C';
+    display: block;
     font-family: 'Cormorant Garamond', serif;
     font-size: 120px;
     font-weight: 300;
@@ -463,21 +472,84 @@
 
   /* ---- SCROLL ANIMATIONS ---- */
   .reveal {
-    opacity: 0;
-    transform: translateY(30px);
     transition: opacity 0.8s ease, transform 0.8s ease;
   }
 
-  .reveal.visible {
+  .js-loaded .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .js-loaded .reveal.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
+  .js-loaded .principle-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition-delay: calc(var(--i, 0) * 80ms);
+  }
+
+  .js-loaded .principle-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---- FOCUS / SKIP-LINK ---- */
+  a:focus-visible,
+  button:focus-visible {
+    outline: 1px solid var(--sage);
+    outline-offset: 4px;
+    border-radius: 1px;
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 16px;
+    z-index: 1000;
+    padding: 12px 18px;
+    background: var(--charcoal);
+    color: var(--cream);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: top 0.2s ease;
+  }
+
+  .skip-link:focus {
+    top: 16px;
+  }
+
+  /* ---- REDUCED MOTION ---- */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+    .js-loaded .reveal,
+    .js-loaded .principle-card {
+      opacity: 1;
+      transform: none;
+    }
+    .hero-bg .circle { opacity: 0; }
+  }
+
   /* ---- RESPONSIVE ---- */
-  @media (max-width: 900px) {
+  @media (max-width: 1024px) {
+    .principles-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 768px) {
     nav { padding: 20px 28px; }
     .nav-links { display: none; }
     .hero { padding: 100px 28px 60px; }
+    .hero h1 br { display: none; }
     .philosophy { padding: 80px 28px; }
     .philosophy-inner { grid-template-columns: 1fr; gap: 40px; }
     .principles { padding: 60px 28px 80px; }
@@ -491,8 +563,10 @@
 </head>
 <body>
 
+<a href="#main" class="skip-link">Skip to content</a>
+
 <!-- Navigation -->
-<nav id="nav">
+<nav id="nav" aria-label="Primary">
   <div class="nav-logo">Willow</div>
   <ul class="nav-links">
     <li><a href="#philosophy">Philosophy</a></li>
@@ -501,9 +575,11 @@
   </ul>
 </nav>
 
+<main id="main">
+
 <!-- Hero -->
 <section class="hero">
-  <div class="hero-bg">
+  <div class="hero-bg" aria-hidden="true">
     <div class="circle"></div>
     <div class="circle"></div>
     <div class="circle"></div>
@@ -513,7 +589,7 @@
     <h1>Concepts that <em>stay</em><br>with people</h1>
     <p class="hero-sub">Weeping Willow Whisperer is a concept-driven creative studio. We design for emotional resonance — work that is felt, remembered, and inhabited.</p>
   </div>
-  <div class="hero-line"></div>
+  <div class="hero-line" aria-hidden="true"></div>
 </section>
 
 <!-- Philosophy -->
@@ -575,7 +651,6 @@
 <!-- Core Belief -->
 <section class="belief">
   <div class="belief-inner reveal">
-    <div class="belief-mark">"</div>
     <blockquote>The most meaningful work is not always the loudest. Beauty should not feel hollow. Design should have emotional consequence. A concept should leave a trace.</blockquote>
     <cite>Studio Belief</cite>
   </div>
@@ -609,6 +684,8 @@
   </div>
 </section>
 
+</main>
+
 <!-- Footer -->
 <footer>
   <div class="footer-left">Weeping Willow Whisperer</div>
@@ -616,42 +693,27 @@
 </footer>
 
 <script>
-  // Scroll-triggered reveal
-  const reveals = document.querySelectorAll('.reveal');
+  document.body.classList.add('js-loaded');
+
+  document.querySelectorAll('.principle-card').forEach((card, i) => {
+    card.style.setProperty('--i', i);
+  });
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.15 });
 
-  reveals.forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal, .principle-card').forEach(el => observer.observe(el));
 
-  // Nav scroll effect
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
-  });
-
-  // Stagger principle cards
-  const cards = document.querySelectorAll('.principle-card');
-  const cardObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        entry.target.style.transitionDelay = `${i * 0.08}s`;
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.1 });
-
-  cards.forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(20px)';
-    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    cardObserver.observe(card);
-  });
+  }, { passive: true });
 </script>
 </body>
 </html>
