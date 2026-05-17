@@ -73,7 +73,7 @@ export default function Nest() {
         <Link to="/" className="mark">Willow <em>—</em></Link>
         <ul>
           <li><Link to="/">Home</Link></li>
-          <li><a href="#">Store</a></li>
+          <li><a href="https://candanication.etsy.com" target="_blank" rel="noopener noreferrer">Store</a></li>
         </ul>
       </nav>
 

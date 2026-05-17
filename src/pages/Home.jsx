@@ -10,7 +10,7 @@ export default function Home() {
           <li><a href="#pillars">Pillars</a></li>
           <li><a href="#routing">Where to begin</a></li>
           <li><a href="#journal">Journal</a></li>
-          <li><a href="#">Store</a></li>
+          <li><a href="https://candanication.etsy.com" target="_blank" rel="noopener noreferrer">Store</a></li>
         </ul>
       </nav>
 
@@ -145,7 +145,7 @@ export default function Home() {
             <div className="body">
               <p>This exists because most decisions don't get made at the moment you sit down to make them. They get made in the quiet before — in what you already notice, already flinch from, already return to.</p>
               <p>The workbook doesn't ask you to choose faster. It gives you a place to notice what's already pulling, and a way to stay with it long enough to hear what it's saying. For thresholds, transitions, and the middle of something unnamed.</p>
-              <a href="#" className="quiet-link">Open the workbook →</a>
+              <a href="https://candanication.etsy.com" target="_blank" rel="noopener noreferrer" className="quiet-link">Browse the store →</a>
             </div>
           </div>
         </section>
