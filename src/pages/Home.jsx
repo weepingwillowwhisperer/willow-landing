@@ -47,12 +47,15 @@ export default function Home() {
           <ul className="pillar-list">
             <li className="pillar" data-p="studio">
               <span className="num">01 / STD</span>
-              <span className="name"><span className="dot"></span>Studio</span>
+              <span className="name">
+                <span className="dot"></span>
+                <a href="/studio/">Studio</a>
+              </span>
               <span className="desc">
                 Brand, offer, and business architecture for work that already exists but hasn't found its shape.
                 <span className="state">For: "I can't find the words for what I do."</span>
               </span>
-              <span className="enter">Enter →</span>
+              <a href="/studio/" className="enter">Enter →</a>
             </li>
             <li className="pillar" data-p="academy">
               <span className="num">02 / ACA</span>

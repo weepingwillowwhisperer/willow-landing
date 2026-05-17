@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weeping Willow Whisperer — Creative Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --warm-white: #FAFAF5;
+    --sage: #8A9A7B;
+    --sage-deep: #6B7D5C;
+    --charcoal: #2C2C2A;
+    --warm-gray: #6B6860;
+    --soft-gray: #A8A49C;
+    --line: #D6D0C4;
+    --accent: #B5A78D;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    color: var(--charcoal);
+    background: var(--cream);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Grain overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 180px;
+  }
+
+  /* ---- NAVIGATION ---- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 48px;
+    transition: background 0.6s ease, backdrop-filter 0.6s ease;
+  }
+
+  nav.scrolled {
+    background: rgba(245, 240, 232, 0.85);
+    backdrop-filter: blur(16px);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--charcoal);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--warm-gray);
+    transition: color 0.3s ease;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--sage);
+    transition: width 0.4s ease;
+  }
+
+  .nav-links a:hover { color: var(--charcoal); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 120px 48px 80px;
+    text-align: center;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .hero-bg .circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0;
+    animation: breathe 8s ease-in-out infinite;
+  }
+
+  .hero-bg .circle:nth-child(1) {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(138, 154, 123, 0.08) 0%, transparent 70%);
+    top: 15%; left: 10%;
+    animation-delay: 0s;
+  }
+
+  .hero-bg .circle:nth-child(2) {
+    width: 450px; height: 450px;
+    background: radial-gradient(circle, rgba(181, 167, 141, 0.06) 0%, transparent 70%);
+    bottom: 10%; right: 15%;
+    animation-delay: 3s;
+  }
+
+  .hero-bg .circle:nth-child(3) {
+    width: 350px; height: 350px;
+    background: radial-gradient(circle, rgba(138, 154, 123, 0.05) 0%, transparent 70%);
+    top: 50%; left: 55%;
+    animation-delay: 5s;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1.05); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+  }
+
+  .hero-tag {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(42px, 6vw, 80px);
+    line-height: 1.1;
+    color: var(--charcoal);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 1.2s ease 0.5s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--sage-deep);
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--warm-gray);
+    max-width: 520px;
+    margin: 0 auto;
+    opacity: 0;
+    animation: fadeUp 1.2s ease 0.8s forwards;
+  }
+
+  .hero-line {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, var(--line), transparent);
+    margin: 60px auto 0;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.2s forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---- PHILOSOPHY ---- */
+  .philosophy {
+    padding: 120px 48px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .philosophy-inner {
+    max-width: 1100px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 24px;
+  }
+
+  .philosophy-left h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.2;
+    color: var(--charcoal);
+  }
+
+  .philosophy-right {
+    padding-top: 8px;
+  }
+
+  .philosophy-right p {
+    font-size: 15px;
+    line-height: 2;
+    color: var(--warm-gray);
+    margin-bottom: 28px;
+  }
+
+  /* ---- PRINCIPLES ---- */
+  .principles {
+    padding: 80px 48px 120px;
+    background: var(--warm-white);
+  }
+
+  .principles-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .principles-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  .principles-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(28px, 3.5vw, 42px);
+    color: var(--charcoal);
+  }
+
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+  }
+
+  .principle-card {
+    background: var(--warm-white);
+    padding: 48px 36px;
+    transition: background 0.5s ease;
+    cursor: default;
+  }
+
+  .principle-card:hover {
+    background: var(--cream);
+  }
+
+  .principle-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--line);
+    margin-bottom: 20px;
+    transition: color 0.5s ease;
+  }
+
+  .principle-card:hover .principle-num {
+    color: var(--sage);
+  }
+
+  .principle-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--charcoal);
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+
+  .principle-text {
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--soft-gray);
+  }
+
+  /* ---- QUOTE / BELIEF ---- */
+  .belief {
+    padding: 140px 48px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+  .belief-inner {
+    max-width: 720px;
+    text-align: center;
+    position: relative;
+  }
+
+  .belief-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 120px;
+    font-weight: 300;
+    color: var(--line);
+    line-height: 0.6;
+    margin-bottom: 24px;
+    user-select: none;
+  }
+
+  .belief blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--charcoal);
+    margin-bottom: 32px;
+  }
+
+  .belief cite {
+    font-family: 'Jost', sans-serif;
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sage);
+  }
+
+  /* ---- APPROACH ---- */
+  .approach {
+    padding: 100px 48px 140px;
+    background: var(--charcoal);
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .approach::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -100px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(138, 154, 123, 0.06) 0%, transparent 70%);
+  }
+
+  .approach-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .approach-header {
+    margin-bottom: 80px;
+  }
+
+  .approach .section-label {
+    color: var(--sage);
+  }
+
+  .approach-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(28px, 3.5vw, 42px);
+    color: var(--cream);
+  }
+
+  .approach-items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
+
+  .approach-item {
+    padding: 40px 36px;
+    border-top: 1px solid rgba(214, 208, 196, 0.12);
+    transition: border-color 0.4s ease;
+  }
+
+  .approach-item:hover {
+    border-top-color: var(--sage);
+  }
+
+  .approach-item h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+
+  .approach-item p {
+    font-size: 13px;
+    line-height: 1.9;
+    color: rgba(245, 240, 232, 0.5);
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    padding: 60px 48px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-left {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--charcoal);
+  }
+
+  .footer-right {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--soft-gray);
+  }
+
+  /* ---- SCROLL ANIMATIONS ---- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 900px) {
+    nav { padding: 20px 28px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 28px 60px; }
+    .philosophy { padding: 80px 28px; }
+    .philosophy-inner { grid-template-columns: 1fr; gap: 40px; }
+    .principles { padding: 60px 28px 80px; }
+    .principles-grid { grid-template-columns: 1fr; }
+    .approach { padding: 80px 28px 100px; }
+    .approach-items { grid-template-columns: 1fr; }
+    .belief { padding: 100px 28px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; padding: 40px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav id="nav">
+  <div class="nav-logo">Willow</div>
+  <ul class="nav-links">
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#principles">Principles</a></li>
+    <li><a href="#approach">Approach</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-tag">Creative Studio</p>
+    <h1>Concepts that <em>stay</em><br>with people</h1>
+    <p class="hero-sub">Weeping Willow Whisperer is a concept-driven creative studio. We design for emotional resonance — work that is felt, remembered, and inhabited.</p>
+  </div>
+  <div class="hero-line"></div>
+</section>
+
+<!-- Philosophy -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <div class="philosophy-left reveal">
+      <p class="section-label">Philosophy</p>
+      <h2>Less about display.<br>More about what<br>remains.</h2>
+    </div>
+    <div class="philosophy-right reveal">
+      <p>The studio was founded on a quiet conviction: that the most meaningful work is not always the loudest. That beauty should carry weight, not just appearance. That a concept, a space, a story should leave a trace long after the encounter ends.</p>
+      <p>Willow creates at the intersection of design, emotion, narrative, and lived experience. The work is refined but warm, restrained but never cold — guided by atmosphere and human response rather than trend or spectacle.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Principles -->
+<section class="principles" id="principles">
+  <div class="principles-inner">
+    <div class="principles-header reveal">
+      <p class="section-label">What Guides Us</p>
+      <h2>The principles we return to</h2>
+    </div>
+    <div class="principles-grid reveal">
+      <div class="principle-card">
+        <div class="principle-num">01</div>
+        <div class="principle-title">Intention over Excess</div>
+        <p class="principle-text">Every decision carries purpose. Nothing is decorative for its own sake.</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-num">02</div>
+        <div class="principle-title">Resonance over Spectacle</div>
+        <p class="principle-text">We measure success not by how loudly something announces itself, but by how long it stays.</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-num">03</div>
+        <div class="principle-title">Atmosphere over Decoration</div>
+        <p class="principle-text">A room, a page, a concept — they should change how you feel, not just what you see.</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-num">04</div>
+        <div class="principle-title">Depth over Trend</div>
+        <p class="principle-text">Trends expire. Ideas with roots endure. We choose the slower, truer path.</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-num">05</div>
+        <div class="principle-title">Memory over Surface</div>
+        <p class="principle-text">We design for what lingers — the afterimage, the feeling you carry home.</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-num">06</div>
+        <div class="principle-title">Restraint as Confidence</div>
+        <p class="principle-text">Subtlety is not absence. It is the quietest form of strength.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Core Belief -->
+<section class="belief">
+  <div class="belief-inner reveal">
+    <div class="belief-mark">"</div>
+    <blockquote>The most meaningful work is not always the loudest. Beauty should not feel hollow. Design should have emotional consequence. A concept should leave a trace.</blockquote>
+    <cite>Studio Belief</cite>
+  </div>
+</section>
+
+<!-- Approach -->
+<section class="approach" id="approach">
+  <div class="approach-inner">
+    <div class="approach-header reveal">
+      <p class="section-label">Approach</p>
+      <h2>How the work takes shape</h2>
+    </div>
+    <div class="approach-items reveal">
+      <div class="approach-item">
+        <h3>Concept Development</h3>
+        <p>Before form, there is meaning. We begin with the emotional and narrative core of a project — what it should feel like to inhabit, encounter, or remember.</p>
+      </div>
+      <div class="approach-item">
+        <h3>Creative Direction</h3>
+        <p>A throughline that holds the work together. Tone, texture, pacing, atmosphere — each element considered for its contribution to the whole.</p>
+      </div>
+      <div class="approach-item">
+        <h3>Storytelling-Led Design</h3>
+        <p>Every space, brand, or concept tells something. We shape that narrative with intention, so the story is felt rather than explained.</p>
+      </div>
+      <div class="approach-item">
+        <h3>Emotionally Intelligent Spaces</h3>
+        <p>We design for human response — not just visual impact. How a space holds attention, shifts a mood, or invites a person to stay.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-left">Weeping Willow Whisperer</div>
+  <div class="footer-right">Concept-Driven Creative Studio — Founded by Candan Üstün</div>
+</footer>
+
+<script>
+  // Scroll-triggered reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Stagger principle cards
+  const cards = document.querySelectorAll('.principle-card');
+  const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.transitionDelay = `${i * 0.08}s`;
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  cards.forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    cardObserver.observe(card);
+  });
+</script>
+</body>
+</html>
