@@ -53,7 +53,7 @@ export default function Home() {
               <ul className="lp-items"><li>Mental load reduction</li><li>Boundaries that are actually livable</li><li>Home and life systems that support, not drain</li></ul>
               <p className="lp-close-line">Before growth, there has to be space.</p>
               <div className="lp-links">
-                <Link className="lp-more" to="/nest">Visit the Nest page <span aria-hidden="true">&rarr;</span></Link>
+                <Link className="lp-more" to="/nest/">Visit the Nest page <span aria-hidden="true">&rarr;</span></Link>
                 <a className="lp-more" href="https://willowpdf.com">All Nest guides at willowpdf.com <span aria-hidden="true">&rarr;</span></a>
               </div>
             </div>
