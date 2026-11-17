@@ -2,7 +2,8 @@
   command = "npm run build"
   publish = "dist"
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# Each route ships as its own HTML file (dist/nest/index.html and so on), so no
+# catch-all rewrite is needed. Unknown paths get dist/404.html with a real 404
+# status instead of a copy of the home page, which search engines treat as
+# duplicate content.
+
