@@ -73,7 +73,7 @@ export default function Nest() {
         <Link to="/" className="mark">Willow <em>—</em></Link>
         <ul>
           <li><Link to="/">Home</Link></li>
-          <li><a href="#">Store</a></li>
+          <li><a href="https://willowpdf.com">Store</a></li>
         </ul>
       </nav>
 
@@ -145,7 +145,7 @@ export default function Nest() {
           Weeping Willow Whisperer LLC · Nest is one of five Willow pillars.
         </div>
         <div>
-          <a href="#">weepingwillowwhisperer.net</a>
+          <a href="https://weepingwillowwhisperer.ai">weepingwillowwhisperer.ai</a>
         </div>
       </footer>
     </div>
