@@ -5,7 +5,7 @@ Vite + React landing for Weeping Willow Whisperer LLC.
 ## Routes
 
 - `/` — Home
-- `/nest` — Nest pillar with interactive nervous system gradient
+- `/nest` — Willow Nest pillar with an interactive nervous system state control
 
 ## Local
 

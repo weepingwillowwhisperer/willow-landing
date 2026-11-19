@@ -11,18 +11,18 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400&family=Cormorant+Garamond:wght@300;400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #F5F0E8;
-    --warm-white: #FAFAF5;
-    --sage: #8A9A7B;
-    --sage-deep: #6B7D5C;
-    --charcoal: #2C2C2A;
-    --warm-gray: #6B6860;
-    --soft-gray: #7A766E;
-    --line: #D6D0C4;
-    --accent: #B5A78D;
+    --cream: #F7F4EF;
+    --warm-white: #FBF9F6;
+    --sage: #D2DBCA;
+    --sage-deep: #4E5947;
+    --charcoal: #2B2926;
+    --warm-gray: #5C5852;
+    --soft-gray: #857D71;
+    --line: #D3CCC2;
+    --accent: #2F3628;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,25 +33,12 @@
   }
 
   body {
-    font-family: 'Jost', sans-serif;
-    font-weight: 300;
+    font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
+    font-weight: 400;
     color: var(--charcoal);
     background: var(--cream);
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
-  }
-
-  /* Grain overlay */
-  body::after {
-    content: '';
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.025;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 180px;
   }
 
   /* ---- NAVIGATION ---- */
@@ -67,7 +54,7 @@
   }
 
   nav.scrolled {
-    background: rgba(245, 240, 232, 0.85);
+    background: rgba(247, 244, 239, 0.92);
     backdrop-filter: blur(16px);
   }
 
@@ -75,7 +62,7 @@
     display: inline-flex;
     align-items: baseline;
     gap: 8px;
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-weight: 400;
     font-size: 15px;
     letter-spacing: 3px;
@@ -86,7 +73,7 @@
   }
 
   .nav-logo-arrow {
-    font-family: 'Jost', sans-serif;
+    font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
     font-size: 13px;
     letter-spacing: 0;
     color: var(--warm-gray);
@@ -158,21 +145,21 @@
 
   .hero-bg .circle:nth-child(1) {
     width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(138, 154, 123, 0.08) 0%, transparent 70%);
+    background: none;
     top: 15%; left: 10%;
     animation-delay: 0s;
   }
 
   .hero-bg .circle:nth-child(2) {
     width: 450px; height: 450px;
-    background: radial-gradient(circle, rgba(181, 167, 141, 0.06) 0%, transparent 70%);
+    background: none;
     bottom: 10%; right: 15%;
     animation-delay: 3s;
   }
 
   .hero-bg .circle:nth-child(3) {
     width: 350px; height: 350px;
-    background: radial-gradient(circle, rgba(138, 154, 123, 0.05) 0%, transparent 70%);
+    background: none;
     top: 50%; left: 55%;
     animation-delay: 5s;
   }
@@ -199,7 +186,7 @@
   }
 
   .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-weight: 300;
     font-size: clamp(42px, 6vw, 80px);
     line-height: 1.1;
@@ -227,7 +214,8 @@
   .hero-line {
     width: 1px;
     height: 80px;
-    background: linear-gradient(to bottom, var(--line), transparent);
+    background: var(--line);
+    height: 1px;
     margin: 60px auto 0;
     opacity: 0;
     animation: fadeUp 1s ease 1.2s forwards;
@@ -263,7 +251,7 @@
   }
 
   .philosophy-left h2 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-weight: 300;
     font-size: clamp(32px, 4vw, 48px);
     line-height: 1.2;
@@ -298,7 +286,7 @@
   }
 
   .principles-header h2 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-weight: 300;
     font-size: clamp(28px, 3.5vw, 42px);
     color: var(--charcoal);
@@ -323,7 +311,7 @@
   }
 
   .principle-num {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-size: 32px;
     font-weight: 300;
     color: var(--line);
@@ -336,7 +324,7 @@
   }
 
   .principle-title {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-size: 20px;
     font-weight: 400;
     color: var(--charcoal);
@@ -367,7 +355,7 @@
   .belief-inner::before {
     content: '\201C';
     display: block;
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-size: 120px;
     font-weight: 300;
     color: var(--line);
@@ -377,7 +365,7 @@
   }
 
   .belief blockquote {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-size: clamp(24px, 3vw, 34px);
     font-weight: 300;
     font-style: italic;
@@ -387,7 +375,7 @@
   }
 
   .belief cite {
-    font-family: 'Jost', sans-serif;
+    font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
     font-style: normal;
     font-size: 11px;
     letter-spacing: 3px;
@@ -412,7 +400,7 @@
     width: 500px;
     height: 500px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(138, 154, 123, 0.06) 0%, transparent 70%);
+    background: none;
   }
 
   .approach-inner {
@@ -431,7 +419,7 @@
   }
 
   .approach-header h2 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-weight: 300;
     font-size: clamp(28px, 3.5vw, 42px);
     color: var(--cream);
@@ -454,7 +442,7 @@
   }
 
   .approach-item h3 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-weight: 400;
     font-size: 22px;
     color: var(--cream);
@@ -477,7 +465,7 @@
   }
 
   .footer-left {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-size: 14px;
     font-weight: 400;
     letter-spacing: 2px;
@@ -594,7 +582,7 @@
 <nav id="nav" aria-label="Primary">
   <a href="/" class="nav-logo" aria-label="Back to Willow home">
     <span class="nav-logo-arrow" aria-hidden="true">←</span>
-    <span class="nav-logo-text">Willow</span>
+    <img src="/brand/logos/willow-wordmark-dark.svg" alt="Willow" width="96" height="32">
   </a>
   <ul class="nav-links">
     <li><a href="#philosophy">Philosophy</a></li>

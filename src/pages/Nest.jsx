@@ -34,6 +34,11 @@ export default function Nest() {
   const [pos, setPos] = useState(45) // start in Calibrated Vigilance
   const [dragging, setDragging] = useState(false)
   const trackRef = useRef(null)
+  const [theme, setTheme] = useState(() => localStorage.getItem('willow-theme') || 'daylight')
+
+  useEffect(() => {
+    localStorage.setItem('willow-theme', theme)
+  }, [theme])
 
   const updateFromClientX = useCallback((clientX) => {
     if (!trackRef.current) return
@@ -68,12 +73,24 @@ export default function Nest() {
   const current = getStateForPosition(pos)
 
   return (
-    <div className="nest-page">
+    <div className="nest-page" data-theme={theme}>
       <nav className="willow-nav">
-        <Link to="/" className="mark">Willow <em>—</em></Link>
+        <Link to="/" className="mark" aria-label="Willow home">
+          <img src={theme === 'dusk' ? '/brand/logos/willow-wordmark-light.svg' : '/brand/logos/willow-wordmark-dark.svg'} alt="" width="96" height="32" />
+        </Link>
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><a href="https://willowpdf.com">Store</a></li>
+          <li>
+            <label>
+              <span className="lp-vh">Reading theme</span>
+              <select value={theme} onChange={(event) => setTheme(event.target.value)} aria-label="Reading theme">
+                <option value="daylight">Daylight</option>
+                <option value="dusk">Dusk</option>
+                <option value="mist">Mist</option>
+              </select>
+            </label>
+          </li>
         </ul>
       </nav>
 

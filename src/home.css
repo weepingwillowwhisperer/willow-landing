@@ -1,20 +1,22 @@
 /* Five-pillar landing — scoped under .lp so /nest and /studio keep their own styles. */
 .lp {
-  --ground:#F5F1EB; --panel:#EDE6DC; --ink-head:#1A0C09; --ink:#2F3032; --ink-soft:#515254;
-  --ink-quote:#462E24; --meta:#988E84; --hair:#CBC1B5; --btn-bg:#1A0C09; --btn-ink:#F5F1EB;
-  --lp-serif:"Cormorant Garamond", Garamond, "Times New Roman", serif;
-  --lp-sans:"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ground:#F7F4EF; --panel:#ECE7DF; --ink-head:#2B2926; --ink:#2B2926; --ink-soft:#5C5852;
+  --ink-quote:#4E5947; --meta:#5C5852; --hair:#D3CCC2; --btn-bg:#5F6B58; --btn-ink:#F7F4EF;
+  --lp-serif:"Newsreader", Georgia, serif;
+  --lp-sans:"Atkinson Hyperlegible Next", system-ui, sans-serif;
   --lp-mono:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
   --lp-gutter:16px; --lp-max:1120px;
   position:relative; z-index:2; min-height:100vh;
   background:var(--ground); color:var(--ink); font-family:var(--lp-sans);
-  font-size:16px; line-height:1.6; font-weight:400;
+  font-size:16px; line-height:1.6; font-weight:300;
 }
-@media (prefers-color-scheme: dark) {
-  .lp {
-    --ground:#1A0C09; --panel:#24150F; --ink-head:#E6DCD0; --ink:#CBC1B5; --ink-soft:#B3A99D;
-    --ink-quote:#E6DCD0; --meta:#988E84; --hair:#462E24; --btn-bg:#E6DCD0; --btn-ink:#1A0C09;
-  }
+.lp[data-theme="dusk"] {
+  --ground:#1D1F1C; --panel:#343B32; --ink-head:#EDEAE3; --ink:#EDEAE3; --ink-soft:#C9C4BB;
+  --ink-quote:#A6B0A0; --meta:#C9C4BB; --hair:#3E453B; --btn-bg:#A6B0A0; --btn-ink:#1D1F1C;
+}
+.lp[data-theme="mist"] {
+  --ground:#D8D8CF; --panel:#CDCDC3; --ink-head:#3F413A; --ink:#3F413A; --ink-soft:#51544C;
+  --ink-quote:#4E5947; --meta:#51544C; --hair:#BDBDB2; --btn-bg:#4E5947; --btn-ink:#E0E0D9;
 }
 @media (min-width:700px) { .lp { --lp-gutter:32px; } }
 .lp a { color:inherit; }
@@ -26,10 +28,13 @@
 .lp-top { position:sticky; top:0; z-index:10; background:color-mix(in srgb, var(--ground) 92%, transparent);
   backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
 .lp-top .lp-wrap { display:flex; align-items:center; justify-content:space-between; gap:16px; height:60px; }
-.lp-brand { font-family:var(--lp-serif); font-style:italic; font-size:22px; color:var(--ink-head); }
+.lp-brand { display:inline-flex; align-items:center; min-width:96px; height:32px; }
+.lp-brand img { width:96px; height:auto; display:block; }
 .lp-pnav { display:none; gap:28px; }
 .lp-pnav a, .lp-lib { font-family:var(--lp-mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--meta); }
 .lp-pnav a:hover, .lp-lib:hover { color:var(--ink); }
+.lp-actions { display:flex; align-items:center; gap:18px; }
+.lp-theme select, .nest-page select { appearance:auto; border:1px solid var(--hair); border-radius:4px; background:var(--surface-raised, var(--ground)); color:var(--ink, var(--text)); font-family:var(--lp-mono); font-size:13px; padding:6px 24px 6px 8px; }
 @media (min-width:900px) { .lp-pnav { display:flex; } }
 
 .lp-hero { padding:clamp(56px,11vw,128px) 0 clamp(48px,8vw,96px); }

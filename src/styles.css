@@ -1,20 +1,22 @@
+@import "./brand-tokens.css";
+
 :root{
-  --bone:        #F8F6F4;
-  --stone:       #EFEBE6;
-  --soft-stone:  #D9D5D0;
-  --fog:         #C4C0BB;
-  --ash:         #2D2D2D;
-  --ash-soft:    #3D3D3B;
-  --mute:        #7A7772;
+  --bone:        #F7F4EF;
+  --stone:       #ECE7DF;
+  --soft-stone:  #D3CCC2;
+  --fog:         #857D71;
+  --ash:         #2B2926;
+  --ash-soft:    #5C5852;
+  --mute:        #5C5852;
 
-  --studio:      #6B6B68;
-  --academy:     #ADBCCD;
-  --nest:        #B5BDAE;
-  --wayfinder:   #8B7D78;
-  --workshop:    #9AA2A9;
+  --studio:      #2F3628;
+  --academy:     #AFB8A7;
+  --nest:        #D2DBCA;
+  --wayfinder:   #8D9686;
+  --workshop:    #4E5547;
 
-  --serif: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
-  --sans:  "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --serif: "Newsreader", Georgia, serif;
+  --sans:  "Atkinson Hyperlegible Next", system-ui, sans-serif;
   --mono:  "IBM Plex Mono", ui-monospace, monospace;
 
   --gutter: clamp(24px, 5vw, 72px);
@@ -36,16 +38,6 @@ body{
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern", "liga";
 }
-body::before{
-  content:"";
-  position: fixed; inset:0;
-  pointer-events: none;
-  background-image: radial-gradient(rgba(45,45,45,.025) 1px, transparent 1px);
-  background-size: 3px 3px;
-  mix-blend-mode: multiply;
-  z-index: 1;
-}
-
 a{color:inherit;text-decoration:none}
 ul{list-style:none}
 
@@ -551,6 +543,14 @@ footer.willow-footer a:hover{ color: var(--ash) }
 .nest-page{
   min-height: 100vh;
 }
+.nest-page[data-theme="dusk"]{
+  --bone:#1D1F1C; --stone:#343B32; --soft-stone:#3E453B; --fog:#7D8A76;
+  --ash:#EDEAE3; --ash-soft:#C9C4BB; --mute:#C9C4BB;
+}
+.nest-page[data-theme="mist"]{
+  --bone:#D8D8CF; --stone:#CDCDC3; --soft-stone:#BDBDB2; --fog:#72726A;
+  --ash:#3F413A; --ash-soft:#51544C; --mute:#51544C;
+}
 .nest-hero{
   padding: clamp(80px, 14vh, 160px) 0 var(--section);
 }
@@ -625,12 +625,8 @@ footer.willow-footer a:hover{ color: var(--ash) }
   position: relative;
   height: 56px;
   border-radius: 28px;
-  background: linear-gradient(
-    90deg,
-    #C2A99F 0%,
-    #B5BDAE 50%,
-    #D5DCD3 100%
-  );
+  background: var(--nest);
+  border: 1px solid var(--soft-stone);
   margin: 24px 0 16px;
   cursor: pointer;
   user-select: none;
@@ -660,11 +656,10 @@ footer.willow-footer a:hover{ color: var(--ash) }
   background: var(--bone);
   border: 1px solid var(--ash-soft);
   transform: translate(-50%, -50%);
-  box-shadow: 0 1px 6px rgba(45,45,45,.18);
-  transition: box-shadow .3s var(--ease);
+  transition: border-color .3s var(--ease);
 }
 .gradient-handle:hover{
-  box-shadow: 0 2px 12px rgba(45,45,45,.28);
+  border-color: var(--ash);
 }
 
 .nest-state-readout{
