@@ -1,15 +1,34 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import '../home.css'
 
 // Five-pillar landing. Copy follows Willow's voice lock; sample PDFs live in /public/samples.
 export default function Home() {
+  const [theme, setTheme] = useState(() => localStorage.getItem('willow-theme') || 'daylight')
+
+  useEffect(() => {
+    localStorage.setItem('willow-theme', theme)
+  }, [theme])
+
   return (
-    <div className="lp">
+    <div className="lp" data-theme={theme}>
       <header className="lp-top">
         <div className="lp-wrap">
-          <a className="lp-brand" href="#top">Willow</a>
-          <nav className="lp-pnav" aria-label="Pillars"><a href="#nest">Nest</a><a href="#academy">Academy</a><a href="#wayfinder">Wayfinder</a><a href="#studio">Studio</a><a href="#workshop">Workshop</a></nav>
-          <a className="lp-lib" href="/journal/">Journal</a>
+          <a className="lp-brand" href="#top" aria-label="Willow home">
+            <img src={theme === 'dusk' ? '/brand/logos/willow-wordmark-light.svg' : '/brand/logos/willow-wordmark-dark.svg'} alt="" width="96" height="32" />
+          </a>
+          <nav className="lp-pnav" aria-label="Primary"><a href="#nest">Nest</a><a href="#academy">Academy</a><a href="#wayfinder">Wayfinder</a><a href="#studio">Studio</a><a href="#workshop">Workshop</a><Link to="/whisperer">Whisperer</Link></nav>
+          <div className="lp-actions">
+            <label className="lp-theme">
+              <span className="lp-vh">Reading theme</span>
+              <select value={theme} onChange={(event) => setTheme(event.target.value)} aria-label="Reading theme">
+                <option value="daylight">Daylight</option>
+                <option value="dusk">Dusk</option>
+                <option value="mist">Mist</option>
+              </select>
+            </label>
+            <a className="lp-lib" href="/journal/">Journal</a>
+          </div>
         </div>
       </header>
 
@@ -44,7 +63,7 @@ export default function Home() {
             <p>Every Willow guide begins the same way: the condition named first, then the smallest useful step. The samples below show exactly what that looks like on the page, so you know what you’re getting before you buy anything.</p>
           </div>
 
-          <section className="lp-pillar" id="nest" style={{ '--accent': '#AAB7A4' }}>
+          <section className="lp-pillar" id="nest" style={{ '--accent': '#D2DBCA' }}>
             <div>
               <p className="lp-kicker"><span className="lp-dot" />01 &middot; Nest</p>
               <h3>Nest</h3>
@@ -74,7 +93,7 @@ export default function Home() {
               </article>
             </div>
           </section>
-          <section className="lp-pillar" id="academy" style={{ '--accent': '#ADBCCD' }}>
+          <section className="lp-pillar" id="academy" style={{ '--accent': '#AFB8A7' }}>
             <div>
               <p className="lp-kicker"><span className="lp-dot" />02 &middot; Academy</p>
               <h3>Academy</h3>
@@ -104,7 +123,7 @@ export default function Home() {
               </article>
             </div>
           </section>
-          <section className="lp-pillar" id="wayfinder" style={{ '--accent': '#8B7D78' }}>
+          <section className="lp-pillar" id="wayfinder" style={{ '--accent': '#8D9686' }}>
             <div>
               <p className="lp-kicker"><span className="lp-dot" />03 &middot; Wayfinder</p>
               <h3>Wayfinder</h3>
@@ -134,7 +153,7 @@ export default function Home() {
               </article>
             </div>
           </section>
-          <section className="lp-pillar" id="studio" style={{ '--accent': '#6E6E6E' }}>
+          <section className="lp-pillar" id="studio" style={{ '--accent': '#2F3628' }}>
             <div>
               <p className="lp-kicker"><span className="lp-dot" />04 &middot; Studio</p>
               <h3>Studio</h3>
@@ -164,7 +183,7 @@ export default function Home() {
               </article>
             </div>
           </section>
-          <section className="lp-pillar" id="workshop" style={{ '--accent': '#9AA2A9' }}>
+          <section className="lp-pillar" id="workshop" style={{ '--accent': '#4E5547' }}>
             <div>
               <p className="lp-kicker"><span className="lp-dot" />05 &middot; Workshop</p>
               <h3>Workshop</h3>

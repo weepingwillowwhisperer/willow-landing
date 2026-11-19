@@ -10,13 +10,22 @@
     <meta property="og:title" content="Willow — Weeping Willow Whisperer" />
     <meta property="og:description" content="Nobody asks the willow to stand straight. Five pillars, two free sample pages from each." />
     <meta property="og:site_name" content="Weeping Willow Whisperer" />
-    <meta name="theme-color" content="#F5F1EB" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#1A0C09" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#F7F4EF" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400&family=Cormorant+Garamond:wght@300;400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   </head>
   <body>
+    <form name="whisperer-community" method="POST" data-netlify="true" hidden>
+      <input name="kind" />
+      <textarea name="content"></textarea>
+      <input name="created_at" />
+    </form>
+    <form name="whisperer-slogans" method="POST" data-netlify="true" hidden>
+      <textarea name="slogan"></textarea>
+      <input name="format" />
+      <input name="created_at" />
+    </form>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
